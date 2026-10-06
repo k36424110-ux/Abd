@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: tri-exchange-orderflow
+    runtime: python
+    plan: free
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SYMBOL
+        value: BTCUSDT
+      - key: BOOK_DEPTH
+        value: "20"
+      - key: ROLLING_SECONDS
+        value: "60"
+      - key: MIN_SCORE
+        value: "70"
